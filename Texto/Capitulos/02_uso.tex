@@ -1,0 +1,288 @@
+\chapter{O uso da classe \texttt{abntex2CBMSC}}
+
+A classe \texttt{abntex2CBMSC} foi projetada com foco na facilidade de uso e na simplificação do processo de formatação de monografias, mantendo ao mesmo tempo a aderência às normas da ABNT. A seguir, discutiremos as especificidades da classe e as orientações básicas sobre a usabilidade do LaTeX para facilitar o trabalho do usuário na criação de documentos acadêmicos.
+
+\section{Especificidades da Classe \texttt{abntex2CBMSC}}
+
+A classe \texttt{abntex2CBMSC} possui diversas características específicas que permitem ao usuário gerar documentos em conformidade com as exigências da ABNT, além de garantir um formato padronizado e de alta qualidade. Algumas dessas especificidades incluem:
+
+\begin{itemize}
+    \item \textbf{Estrutura de Arquivos}: Na raíz, encontramos: 
+    \begin{itemize}
+        \item Imagens
+        \begin{itemize}
+            \item Arquivos de imagem a serem carregados para o PDF
+        \end{itemize}
+        \item SRC
+            \begin{itemize}
+                \item abntex2CBMSC.tex
+                \item src.tex
+            \end{itemize}
+        \item Anexos
+        \begin{itemize}
+            \item Arquivos Latex dos Anexos
+        \end{itemize}
+        \item Apêndices
+        \begin{itemize}
+            \item Arquivos Latex dos Apêndices
+        \end{itemize}
+        \item Texto
+            \begin{itemize}
+                \item Capitulos
+                    \begin{itemize}
+                        \item Arquivos Latex dos capítulos
+                    \end{itemize}
+                \item Arquivos Latex de Texto Padronizados
+            \end{itemize}
+        \item compile.bat
+        \item compile.sh
+        \item monografia.tex
+        \item referencias.bib
+        \item siglas.tex
+    \end{itemize}
+
+     \hspace{0.5cm} A pasta Imagens serve para armazenar as imagens que deseja-se utilizar no documento.
+
+     \hspace{0.5cm} A pasta SRC possui os arquivos com a definição da classe, não é recomendável realizar alterações.
+
+     \hspace{0.5cm} A pasta Texto possui os arquivos de texto do documento. Na raíz da pasta, encontra-se os arquivos de elementos padronizados do trabalho, como Agradecimentos, Epígrafe, Introdução, Conclusão. Além disso, há a pasta Capítulos, que serve para armazenar os capítulos do conteúdo do documento, os arquivos nessa pasta devem ser nomeados na ordem em que deseja-se que sejam incluídos ao documento, sempre no formato \texttt{XX\_descrição.tex}. Da mesma forma que a pasta Capítulos, existem as pastas Anexos e Apêndices, que funcionam de forma análoga.
+
+     \hspace{0.5cm} Na pasta raíz, encontram-se os arquivos chave do documento. O arquivo siglas.tex possui as definições das siglas utilizadas no documento. O arquivo referencias.bib possui as referências no formato bibtex que serão utilizadas.
+
+     \hspace{0.5cm} O arquivo monografia.tex possui as configurações para que o documento se adéque ao trabalho.
+
+     \hspace{0.5cm} Os arquivos compile.bat e compile.sh são scripts para Windows e Linux, respectivamente, para gerar o documento PDF.
+
+     \hspace{0.5cm}Caso não utilize os arquivos .bat ou .sh para gerar o PDF, deve-se criar os arquivos capitulos.tex, anexos.tex e apendices.tex para que as inclusões sejam realizadas de forma correta. Da mesma maneira, caso seja necessário gerar a lista de figuras e de tabelas, é necessário criar os arquivos vazios imagem.txt e tabela.txt. Ao utilizar os scripts, esses arquivos são gerados automaticamente, entretanto, para que sejam criadas as listas de imagens e tabelas é necessário passar essas opções para o script com os comandos -i e -t, respectivamente
+    .
+
+     \begin{verbatim}
+         sh compile.sh [-i] [-t]
+     \end{verbatim}
+
+     \item \textbf{Definindo a Estrutura Básica do Documento}: Ao configurar corretamente as informações básicas, o documento já irá ser gerado com a formatação básica. Para isso devem ser alterados os seguintes itens o arquivo monografia.tex:
+
+    \begin{verbatim}
+\curso{CFO} % CFO, CCEM ou CAEE
+\end{verbatim}
+
+Para definição de qual curso está sendo realizado.
+
+\begin{verbatim}
+\titulo{Uma Classe Latex para Trabalhos de Conclusão de Curso do CBMSC} %Título do trabalho
+\end{verbatim}
+
+Para definir o título do trabalho.
+
+\begin{verbatim}
+\autor{Jonatas Ribeiro Senna Pires} %Nome do autor
+\end{verbatim}
+
+Para definir o nome do autor.
+
+\begin{verbatim}
+\local{Florianópolis} %Cidade
+\end{verbatim}
+
+Para definir a cidade.
+
+\begin{verbatim}
+\ano{2025} % Ano de apresentação do trabalho
+\mes{Fevereiro} % Mês da apresentação do Trabalho
+\dia{28} % Dia da apresentação do Trabalho
+\end{verbatim}
+
+Para definir a data de apresentação do trabalho.
+
+\begin{verbatim}
+\instituicao{Corpo de Bombeiros Militar de Santa Catarina} %nome da instituição
+\end{verbatim}
+
+Define a instituição
+
+\begin{verbatim}
+\linhaDePesquisa{Editar a linha de pesquisa} % linha de pesquisa segundo a ig40
+\end{verbatim}
+
+Define a linha de pesquisa do trabalho
+\begin{verbatim}
+%\orientador[título]{Nome}{corporação}
+\orientador[\posto{CAP} \corporacao{BM}]{Bruno Lazarin Koch}{CBMSC} 
+%\coorientador[título]{Nome}{corporação}
+\coorientador[\posto{CAP} \corporacao{BM}]{Diego Medeiros Franz}{CBMSC}
+%\adicionarMembro{título}{Nome}{corporação}  
+\adicionarMembro{\posto{TC} \corporacao{BM}}{Juliana Kretzer}{CBMSC} 
+\adicionarMembro{\posto{MAJ} \corporacao{BM}}{Natália Cauduro}{CBMSC}
+\adicionarMembro{\posto{1TEN} \corporacao{BM}}{Marco Timmermann}{CBMSC}
+\end{verbatim}
+
+Inclui os membros da banca. O coorientador é opcional. Na atual versão, é possível colocar até 5 pessoas, contando com orientador e coorientador.
+
+\begin{verbatim}
+\adicionarPalavraChave{Latex} %palavras chave em português
+\adicionarPalavraChave{Monografia}
+\adicionarPalavraChave{Padronização}
+\adicionarKeyword{Latex} %palavras chave em inglês
+\adicionarKeyword{Monograph}
+\adicionarKeyword{Standartization}
+     \end{verbatim}
+
+Preenche a lista de palavras chave, em ambas as línguas.
+
+
+
+
+\end{itemize}
+
+Essas especificidades tornam o processo de elaboração de monografias mais eficiente e menos suscetível a erros de formatação, permitindo que o usuário se concentre no conteúdo do trabalho.
+
+\section{Usabilidade Básica de LaTeX}
+
+A usabilidade do LaTeX, por ser um sistema de preparação de documentos baseado em texto, requer uma familiarização inicial com sua sintaxe e estrutura. Embora tenha uma curva de aprendizado, sua flexibilidade e precisão no controle de formatação compensam qualquer dificuldade inicial. A seguir, apresentamos alguns dos conceitos e comandos básicos para utilizar LaTeX de maneira eficaz:
+
+\begin{itemize}
+
+    \item \textbf{Comandos de Seções e Subtítulos}: Para criar capítulos, seções e subseções, utilizam-se os comandos:
+    \begin{verbatim}
+    \chapter{Título do Capítulo}
+    \section{Título da Seção}
+    \subsection{Título da Subseção}
+    \subsubsection{Título da Subsubseção}
+    \end{verbatim}
+
+    \chapter{Título do Capítulo}
+    \section{Título da Seção}
+    \subsection{Título da Subseção}
+
+    A numeração e formatação dos capítulos e seções são feitas automaticamente.
+
+    \item \textbf{Inserção de Texto}: O texto é simplesmente digitado no ambiente de documento. LaTeX cuida da formatação tipográfica, como a definição de margens, espaçamento, e fontes de forma automática.
+
+    \item \textbf{Citações e Referências}: Para inserir citações, utiliza-se o comando \texttt{\textbackslash cite\{chave\}}.
+
+    Um exemplo seria o seguinte:
+
+    \begin{verbatim}
+        A Internet das Coisas[...] \cite{atzori2010internet}.
+    \end{verbatim}
+    Que gera o seguinte resultado:
+\\\\
+    \hspace{1cm}A Internet das Coisas[...] \cite{atzori2010internet}.
+\\  \\  
+    As referências bibliográficas são inseridas em um arquivo separado com a extensão \texttt{.bib}, que será processado pelo LaTeX. O formato para incluir uma referência é o \texttt{bibtex} conforme o seguinte:
+
+    \begin{verbatim}
+        @article{atzori2010internet,
+                title={The internet of things: A survey},
+                author={Atzori, Luigi and Iera, Antonio 
+                and Morabito, Giacomo},
+                journal={Computer networks},
+                volume={54},
+                number={15},
+                pages={2787--2805},
+                year={2010},
+                publisher={Elsevier}
+            }
+    \end{verbatim}
+
+
+    É importante ressaltar que apenas referências utilizadas serão impressas no capítulo de referências
+
+\end{itemize}
+
+
+\begin{itemize}
+    \item \textbf{Negrito}: Para deixar o texto em negrito, basta usar o comando \texttt{\textbackslash textbf\{texto\}}. Exemplo:
+    \begin{verbatim}
+    \textbf{Este texto está em negrito.}
+    \end{verbatim}
+
+    Que gera o seguinte resultado:
+
+    \hspace{1cm}\textbf{Este texto está em negrito.}
+    
+    \item \textit{Itálico}: Para deixar o texto em itálico, utilize o comando \texttt{\textbackslash textit\{texto\}}. Exemplo:
+    \begin{verbatim}
+    \textit{Este texto está em itálico.}
+    \end{verbatim}
+
+    Que gera o seguinte resultado:
+
+    \hspace{1cm}\textit{Este texto está em itálico.}
+    
+    \item \underline{Sublinhado}: Para sublinhar o texto, use o comando \texttt{\textbackslash underline\{texto\}}. Exemplo:
+    \begin{verbatim}
+    \underline{Este texto está sublinhado.}
+    \end{verbatim}
+
+    Que gera o seguinte resultado:
+
+    \hspace{1cm}\underline{Este texto está sublinhado.}
+    
+    \item \textbf{Listas Não Numeradas}: Para criar listas não numeradas (listas com marcadores), usa-se o ambiente \texttt{itemize}. Exemplo:
+    \begin{verbatim}
+    \begin{itemize}
+        \item Primeiro item
+        \item Segundo item
+        \item Terceiro item
+    \end{itemize}
+    \end{verbatim}
+
+    Que gera o seguinte resultado:
+
+    \begin{itemize}
+        \item Primeiro item
+        \item Segundo item
+        \item Terceiro item
+    \end{itemize}
+    
+    \item \textbf{Listas Numeradas}: Para criar listas numeradas, utiliza-se o ambiente \texttt{enumerate}. Exemplo:
+    \begin{verbatim}
+    \begin{enumerate}
+        \item Primeiro item
+        \item Segundo item
+        \item Terceiro item
+    \end{enumerate}
+    \end{verbatim}
+
+    Que gera o seguinte resultado:
+
+    \begin{enumerate}
+        \item Primeiro item
+        \item Segundo item
+        \item Terceiro item
+    \end{enumerate}
+
+    \item \textbf{Quebra de Linha}: Para inserir uma nova linha sem iniciar um novo parágrafo, utiliza-se o comando \texttt{\\}. Exemplo:
+    \begin{verbatim}
+    Este é o primeiro parágrafo.\\
+    Este é o segundo parágrafo, que está em uma nova linha.
+    \end{verbatim}
+
+    Que gera o seguinte resultado:
+
+    Este é o primeiro parágrafo.\\
+    Este é o segundo parágrafo, que está em uma nova linha.
+    
+    \item \textbf{Nova Página}: Para iniciar uma nova página, basta utilizar o comando \texttt{\textbackslash newpage}. Exemplo:
+    \begin{verbatim}
+    Este texto está na primeira página.
+    \newpage
+    Este texto está na segunda página.
+    \end{verbatim}
+
+    \item \textbf{Figuras}: Para inserir uma figura, basta utilizar o comando \texttt{\textbackslash figura\{tamanho\}\{nome do arquivo\}\{Legenda\}\{chave\}}. Exemplo:
+    \begin{verbatim}
+    \figura{scale=0.4}{ex.jpg}{Exemplo}{fig:exemplo}
+    \end{verbatim}
+
+    Para referenciar a figura em alguma parte do texto, basta utilizar o comando \texttt{\textbackslash ref}, passando como argumento a chave da imagem.
+
+    \begin{verbatim}
+    É possível observar tal comportamento na Figura \ref{fig:exemplo}.
+    \end{verbatim}
+\end{itemize}
+
+Esses comandos básicos são suficientes para a elaboração de um documento simples. À medida que o usuário se familiariza com a sintaxe, é possível utilizar comandos mais avançados para personalizar o documento de acordo com suas necessidades. O uso de LaTeX, especialmente com a classe \texttt{abntex2CBMSC}, permite que o autor foque no conteúdo do trabalho, enquanto o sistema cuida de toda a formatação e organização do documento.
+
+

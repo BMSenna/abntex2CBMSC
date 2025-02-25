@@ -1,0 +1,163 @@
+%% ==================================================================
+%% Documento baseado na classe abntex2CBMSC.cls
+%% ==================================================================
+%%
+%% Este documento usa a classe abntex2CBMSC, que é uma adaptação da
+%% classe abntex2.cls. A adaptação foi realizada para atender às
+%% necessidades do Corpo de Bombeiros Militar de Santa Catarina (CBMSC).
+%%
+%% Autor da adaptação: Jonatas Senna <jonatas.senna.bmsc@gmail.com.com>
+%% Instituição: CBMSC
+%% Data: 06/02/2025
+%%
+%% Licença da classe: LaTeX Project Public License (LPPL) v1.3c ou posterior
+%% Consulte: https://www.latex-project.org/lppl.txt
+%%
+%% Este documento pode ser modificado livremente para atender às 
+%% necessidades dos usuários, desde que respeitada a licença da classe.
+%%
+%% ==================================================================
+
+% ------------------------------------------------------------------------
+% ------------------------------------------------------------------------
+% abnTeX2CBMSC: trabalhos monograficos em geral em conformidade com 
+% ABNT NBR 14724:2011: Informacao e documentacao - Trabalhos academicos
+% ------------------------------------------------------------------------
+% ------------------------------------------------------------------------
+% ---
+% Classe do Documento, não alterar nada
+% ---
+\documentclass[
+	% -- opções da classe memoir --
+	12pt,				% tamanho da fonte
+	oneside,			% para impressão em recto e verso. Oposto a oneside
+	a4paper,			% tamanho do papel. 
+	% -- opções da classe abntex2 --
+	chapter = TITLE,		% títulos de capítulos convertidos em letras maiúsculas
+	section=TITLE,		% títulos de seções convertidos em letras maiúsculas
+	subsection=TITLE,	% títulos de subseções convertidos em letras maiúsculas
+	subsubsection=TITLE,% títulos de subsubseções convertidos em letras maiúsculas
+	% -- opções do pacote babel --
+	english,			% idioma adicional para hifenização
+	brazil				% o último idioma é o principal do documento
+	]{SRC/abntex2CBMSC}
+
+
+% ---
+% Informações de dados básicos
+% ---
+\curso{CFO} % CFO, CCEM ou CAEE
+\titulo{Uma Classe Latex para Trabalhos de Conclusão de Curso do CBMSC} %Título do trabalho
+\autor{Jonatas Ribeiro Senna Pires} %Nome do autor
+\local{Florianópolis} %Cidade
+\ano{2025} % Ano de apresentação do trabalho
+\mes{Fevereiro} % Mês da apresentação do Trabalho
+\dia{28} % Dia da apresentação do Trabalho
+\instituicao{Corpo de Bombeiros Militar de Santa Catarina} %nome da instituição
+\linhaDePesquisa{Editar a linha de pesquisa} % linha de pesquisa segundo a ig40
+% ---
+% Informações da banca
+% até 5 membros no total está bem configurado
+% ---
+\orientador[\posto{CAP} \corporacao{BM}]{Bruno Lazarin Koch}{CBMSC} % \orientador[título]{Nome}{corporação}
+\coorientador[\posto{CAP} \corporacao{BM}]{Diego Medeiros Franz}{CBMSC}%\coorientador[título]{Nome}{corporação}
+\adicionarMembro{\posto{TC} \corporacao{BM}}{Juliana Kretzer}{CBMSC} %membro da banca 
+\adicionarMembro{\posto{MAJ} \corporacao{BM}}{Natália Cauduro}{CBMSC}
+\adicionarMembro{\posto{1TEN} \corporacao{BM}}{Marco Timmermann}{CBMSC}
+% ---
+% Palavras Chave
+% ---
+\adicionarPalavraChave{Latex} %palavras chave em português
+\adicionarPalavraChave{Monografia}
+\adicionarPalavraChave{Padronização}
+\adicionarKeyword{Latex} %palavras chave em inglês
+\adicionarKeyword{Monograph}
+\adicionarKeyword{Standartization}
+
+
+
+% ---
+% arquivo com definições gerais, pacotes e funções que geram os elementos pré textuais
+% ---
+\input{SRC/src}
+
+
+% ----------------------------------------------------------
+% ELEMENTOS TEXTUAIS
+% ----------------------------------------------------------
+
+
+% ----------------------------------------------------------
+% Introdução
+% ----------------------------------------------------------
+
+\input{Texto/introducao}
+
+% ----------------------------------------------------------
+% Importa os capítulos de forma automática quando o arquivo é compilado pelo comando fornecido
+% ----------------------------------------------------------
+
+\input{capitulos.tex}
+
+% ----------------------------------------------------------
+% Conclusão
+% ----------------------------------------------------------
+\input{Texto/conclusao}
+
+% ----------------------------------------------------------
+% Finaliza a parte no bookmark do PDF
+% para que se inicie o bookmark na raiz
+% e adiciona espaço de parte no Sumário
+% ----------------------------------------------------------
+\phantompart
+
+
+% ----------------------------------------------------------
+% ELEMENTOS PÓS-TEXTUAIS
+% ----------------------------------------------------------
+\postextual
+% ----------------------------------------------------------
+
+% ----------------------------------------------------------
+% Referências bibliográficas
+% ----------------------------------------------------------
+% \bibliography{abntex2-modelo-references}
+
+\newpage
+
+\defbibheading{bibliography}[\refname]{%
+  \section*{\centering\textbf{\MakeUppercase{#1}}} % Centraliza, textbf e maiúsculo
+}
+% Aumentando o espaçamento entre itens da bibliografia
+\setlength{\bibitemsep}{0.6\baselineskip}
+\printbibliography
+
+
+% ----------------------------------------------------------
+% Apêndices
+% ----------------------------------------------------------
+
+% ---
+% Inicia os apêndices
+% ---
+\imprimirapendices
+% ---
+
+
+% ----------------------------------------------------------
+% Anexos
+% ----------------------------------------------------------
+
+% ---
+% Inicia os anexos
+% ---
+\imprimiranexos
+
+%---------------------------------------------------------------------
+% INDICE REMISSIVO
+%---------------------------------------------------------------------
+\phantompart
+\printindex
+%---------------------------------------------------------------------
+
+\end{document}

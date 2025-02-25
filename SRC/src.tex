@@ -1,0 +1,247 @@
+
+
+% ---
+% Pacotes básicos 
+% ---
+\usepackage{times}			   % Usa a fonte times new roman			
+\usepackage[T1]{fontenc}		% Selecao de codigos de fonte.
+\usepackage[utf8]{inputenc}		% Codificacao do documento (conversão automática dos acentos)
+\usepackage{indentfirst}		% Indenta o primeiro parágrafo de cada seção.
+\usepackage{color}				% Controle das cores
+\usepackage{graphicx}			% Inclusão de gráficos
+\graphicspath{ {./Imagens/} }
+\usepackage{microtype} 			% para melhorias de justificação
+\usepackage[acronym,nonumberlist]{glossaries}
+\usepackage{csquotes}
+\usepackage{enumitem}% http://ctan.org/pkg/enumitem
+
+
+% ---
+% Pacotes de citações
+% ---
+\usepackage[backend=biber,style=abnt,backref=true]{biblatex}
+\addbibresource{referencias.bib} 
+
+
+
+% ---
+
+
+
+
+% informações do PDF
+\makeatletter
+\hypersetup{
+     	%pagebackref=true,
+		pdftitle={\@title}, 
+		pdfauthor={\@author},
+    	pdfsubject={\imprimirpreambulo},
+	    pdfcreator={LaTeX with abnTeX2},
+		pdfkeywords={abnt}{latex}{abntex}{abntex2}{trabalho acadêmico}, 
+		colorlinks=true,       		% false: boxed links; true: colored links
+    	linkcolor=black,          	% color of internal links
+    	citecolor=black,        		% color of links to bibliography
+    	filecolor=magenta,      		% color of file links
+		urlcolor=blue,
+		bookmarksdepth=4
+}
+\makeatother
+% --- 
+% Verifica se há figuras no documento
+
+% ---
+% Posiciona figuras e tabelas no topo da página quando adicionadas sozinhas
+% em um página em branco. Ver https://github.com/abntex/abntex2/issues/170
+\makeatletter
+\setlength{\@fptop}{5pt} % Set distance from top of page to first float
+\makeatother
+% ---
+
+% ---
+% Possibilita criação de Quadros e Lista de quadros.
+% Ver https://github.com/abntex/abntex2/issues/176
+%
+\newcommand{\quadroname}{Quadro}
+\newcommand{\listofquadrosname}{Lista de quadros}
+
+\newfloat[chapter]{quadro}{loq}{\quadroname}
+\newlistof{listofquadros}{loq}{\listofquadrosname}
+\newlistentry{quadro}{loq}{0}
+
+% configurações para atender às regras da ABNT
+\setfloatadjustment{quadro}{\centering}
+\counterwithout{quadro}{chapter}
+\renewcommand{\cftquadroname}{\quadroname\space} 
+\renewcommand*{\cftquadroaftersnum}{\hfill--\hfill}
+
+
+\setfloatlocations{quadro}{hbtp} % Ver https://github.com/abntex/abntex2/issues/176
+% ---
+\DeclareLabelalphaTemplate{
+  \labelelement{
+    \field[strwidth=1]{year}
+  }
+  \labelelement{
+    \literal{a}
+  }
+}
+
+\renewbibmacro*{author}{%
+  \ifboolexpr{ test {\ifcitation} }
+    {\ifnameundef{shortauthor} % Se for uma citação, usa shortauthor
+      {\printnames{author}}
+      {\printnames{shortauthor}}}
+    {\printnames{author}} % Se for uma referência completa, usa author
+}
+% --- 
+% Espaçamentos entre linhas e parágrafos 
+% --- 
+
+% O tamanho do parágrafo é dado por:
+\setlength{\parindent}{1.3cm}
+
+% Controle do espaçamento entre um parágrafo e outro:
+\setlength{\parskip}{0.2cm}  % tente também \onelineskip
+
+% ---
+% compila o indice
+% ---
+\makeindex
+% ---
+
+% ----
+% Início do documento
+% ----
+\usepackage{float}
+\makeglossaries
+\usepackage{newtxtext,newtxmath}
+
+
+
+\begin{document}
+
+\input{siglas}
+% Importando as siglas do arquivo externo
+
+
+
+% Seleciona o idioma do documento (conforme pacotes do babel)
+%\selectlanguage{english}
+\selectlanguage{brazil}
+
+% Retira espaço extra obsoleto entre as frases.
+\frenchspacing 
+
+% ----------------------------------------------------------
+% ELEMENTOS PRÉ-TEXTUAIS
+% ----------------------------------------------------------
+% \pretextual
+
+% ---
+% Capa
+% ---
+\imprimircapa
+% ---
+
+% ---
+% Folha de rosto
+% (o * indica que haverá a ficha bibliográfica)
+% ---
+\imprimirfolhaderosto*
+% ---
+
+\imprimirFichaCatalografica
+
+
+% ---
+
+% ---
+% Inserir errata
+% ---
+
+% ---
+
+% ---
+% Inserir folha de aprovação
+% ---
+
+\newpage
+\imprimirFolhadeAprovacao
+
+
+% ---
+
+\imprimirDedicatoria
+% ---
+
+% ---
+% Agradecimentos
+% ---
+ \newpage
+ \imprimirAgradecimentos
+
+% ---
+
+% ---
+% Epígrafe
+% ---
+\imprimirEpigrafe
+% ---
+
+% ---
+% RESUMOS
+% ---
+
+% resumo em português
+\imprimirResumo
+  
+
+
+% % resumo em inglês
+\imprimirAbstract
+
+% ---
+
+% ---
+% inserir lista de ilustrações
+% ---
+\IfFileExists{imagem.txt}{
+\newpage
+    \pdfbookmark[0]{\listfigurename}{lof} % Adiciona bookmark
+    \listoffigures* % Gera a lista de figuras
+}{}
+% ---
+
+% ---
+% inserir lista de quadros
+% ---
+%\pdfbookmark[0]{\listofquadrosname}{loq}
+%\listofquadros*
+%\cleardoublepage
+% ---
+
+% ---
+% inserir lista de tabelas
+% ---
+\IfFileExists{tabela.txt}{%
+\newpage
+\listoftables*
+}{}
+
+\cleardoublepage
+
+\listadeacronimos
+
+% ---
+% inserir o sumario
+% ---
+\pdfbookmark[0]{\contentsname}{toc}
+
+\renewcommand{\contentsname}{%
+  \centering\textbf{SUMÁRIO}%
+}
+
+\tableofcontents*
+\cleardoublepage
+% ---
+
