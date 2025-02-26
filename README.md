@@ -2,6 +2,13 @@
 
 Este repositório contém uma classe LaTeX derivada do [abnTeX2](https://github.com/abntex/abntex2), adaptada para atender às necessidades específicas do **Centro de Ensino Bombeiro Militar do Corpo de Bombeiros Militar de Santa Catarina (CBMSC)**. A classe mantém a compatibilidade com as normas da ABNT e inclui ajustes personalizados para os documentos de conclusão de cursos da instituição.
 
+## Pré-requisitos
+ É necessário instalar os seguintes pacotes:
+ - texlive-full 
+ - texlive-latex-recommended
+ - texlive-latex-extra
+ - texlive-lang-portuguese
+
 ## Características
 
 - Baseada no abnTeX2, garantindo conformidade com as normas ABNT.
