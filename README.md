@@ -8,6 +8,7 @@ Este repositório contém uma classe LaTeX derivada do [abnTeX2](https://github.
  - texlive-latex-recommended
  - texlive-latex-extra
  - texlive-lang-portuguese
+ - biber
 
 ## Características
 

@@ -69,11 +69,11 @@ gerar_arquivo_tex "Texto/Anexos" "../../anexos.tex" "anexos"
 MAIN_FILE="monografia"
 
 # Executando o fluxo de compilação LaTeX com biber
-pdflatex $MAIN_FILE.tex
+pdflatex -interaction=nonstopmode $MAIN_FILE.tex
 biber $MAIN_FILE
 makeglossaries $MAIN_FILE
-pdflatex $MAIN_FILE.tex
-pdflatex $MAIN_FILE.tex
+pdflatex -interaction=nonstopmode $MAIN_FILE.tex
+pdflatex -interaction=nonstopmode $MAIN_FILE.tex
 
 # Deletando os arquivos auxiliares
 rm -f $MAIN_FILE.aux $MAIN_FILE.bbl $MAIN_FILE.blg $MAIN_FILE.glo $MAIN_FILE.glg $MAIN_FILE.gls $MAIN_FILE.acn $MAIN_FILE.acr $MAIN_FILE.out $MAIN_FILE.toc $MAIN_FILE.lof $MAIN_FILE.fls $MAIN_FILE..bbl $MAIN_FILE.idx $MAIN_FILE.run.xml $MAIN_FILE.lot $MAIN_FILE.ist $MAIN_FILE.bcf $MAIN_FILE..blg $MAIN_FILE.glsdefs $MAIN_FILE.alg anexos.tex apendices.tex capitulos.tex *.txt
