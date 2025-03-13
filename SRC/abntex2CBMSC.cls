@@ -1193,9 +1193,11 @@ de Bombeiros Militar de Santa Catarina.}
 
 
 %função para simplificar a inserção de imagens
-\newcommand{\figura}[5][H]{ 
+\newcommand{\figura}[6][H]{ 
     \begin{figure}[#1]
-        \centering
+        \ifthenelse{\equal{#6}{L}} % Verifica se o parâmetro é "L"
+            {\hspace*{-1.5cm}} % Alinha à esquerda
+            {\centering} % Centraliza por padrão
         \includegraphics[#2]{#3}
         \caption{#4}
         \label{#5}
@@ -1306,8 +1308,8 @@ de Bombeiros Militar de Santa Catarina.}
     \vspace*{\fill}
     %\hspace{.45\textwidth}
     \begin{flushleft}
-        Monografia apresentada como pré-requisito para conclusão do \cursoCompleto
-do \imprimirinstituicao.
+        Monografia apresentada como pré-requisito para conclusão do \cursoCompleto~do 
+        \imprimirinstituicao.
 \end{flushleft}
     
     %\vspace*{\fill}
