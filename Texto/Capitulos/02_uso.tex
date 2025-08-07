@@ -271,10 +271,14 @@ A usabilidade do LaTeX, por ser um sistema de preparação de documentos baseado
     Este texto está na segunda página.
     \end{verbatim}
 
-    \item \textbf{Figuras}: Para inserir uma figura, basta utilizar o comando \texttt{\textbackslash figura\{tamanho\}\{nome do arquivo\}\{Legenda\}\{chave\}}. Exemplo:
+    \item \textbf{Figuras}: Para inserir uma figura, basta utilizar o comando \texttt{\textbackslash figura\{tamanho\}\{nome do arquivo\}\{Legenda\}\{chave\}\{\}\{fonte\}}. Exemplo:
     \begin{verbatim}
-    \figura{scale=0.4}{ex.jpg}{Exemplo}{fig:exemplo}
-    \end{verbatim}
+\figura{scale=0.4}{exemplo.png}{Exemplo}
+       {fig:exemplo}{}{Governo de Santa Catarina (2025)}
+\end{verbatim}
+
+    \figura{scale=0.4}{exemplo.png}{Exemplo}{fig:exemplo}{}{Governo de Santa Catarina (2025)}
+
 
     Para referenciar a figura em alguma parte do texto, basta utilizar o comando \texttt{\textbackslash ref}, passando como argumento a chave da imagem.
 

@@ -1191,18 +1191,33 @@ de Bombeiros Militar de Santa Catarina.}
 \makeatother
 % ---
 
+\newcommand{\fonteAutor}[1]{
+\\
+\vspace{4pt}
+\begin{center}
+Fonte: #1.
+\end{center}
+}
 
-%função para simplificar a inserção de imagens
-\newcommand{\figura}[6][H]{ 
+\newcommand{\figura}[7][H]{ 
     \begin{figure}[#1]
-        \ifthenelse{\equal{#6}{L}} % Verifica se o parâmetro é "L"
-            {\hspace*{-1.5cm}} % Alinha à esquerda
-            {\centering} % Centraliza por padrão
-        \includegraphics[#2]{#3}
+        \centering
         \caption{#4}
+        % Verificação robusta do posicionamento
+        \if\relax\detokenize{#6}\relax
+            \centering\includegraphics[#2]{#3}% Caso vazio
+        \else
+            \ifnum`#6=`L\relax
+                \hspace*{-1.5cm}\includegraphics[#2]{#3}% Alinha à esquerda
+            \else
+                \centering\includegraphics[#2]{#3}% Centraliza
+            \fi
+        \fi
+        \fonteAutor{#7}
         \label{#5}
     \end{figure}
 }
+
 
 \newcommand{\tab}{
   \par\indent
